@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="theburgerbackendproject2.client/theburgerbackendproject2.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="TheBurgerBackendProject2.Server/TheBurgerBackendProject2.Server.csproj" />
+</Solution>
