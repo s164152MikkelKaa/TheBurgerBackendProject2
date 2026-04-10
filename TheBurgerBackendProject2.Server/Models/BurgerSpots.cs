@@ -11,5 +11,7 @@
         public double? SpotScore { get; set; }
         public DateTime LastEditAt { get; set; }
         public string? LastEditBy { get; set; }
+
+        public ICollection<UserReview> UserReviews { get; set; } = new List<UserReview>();
     }
 }

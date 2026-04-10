@@ -3,8 +3,12 @@
     public class UserReview
     {
         public int Id { get; set; }
+
         public int SpotId { get; set; }
+        public BurgerSpots Spot { get; set; } = null!;
+
         public string? UserId { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime LastEditAt { get; set; }
         public double? Score { get; set; }

@@ -1,6 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Supabase;
+using System.Text;
 using TheBurgerBackendProject2.Server.Data;
 
 namespace TheBurgerBackendProject2.Server
@@ -16,6 +18,21 @@ namespace TheBurgerBackendProject2.Server
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddAuthorization();
+
+            var keyBytes = Encoding.UTF8.GetBytes(builder.Configuration["Authentication:JwtSecret"]!);
+
+            builder.Services.AddAuthentication().AddJwtBearer(o =>
+            {
+                o.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+                    ValidAudience = builder.Configuration["Authentication:ValidAudience"],
+                    ValidIssuer = builder.Configuration["Authentication:ValidIssuer"]
+                };
             });
 
             builder.Services.AddControllers();
